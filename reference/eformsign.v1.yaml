@@ -5,7 +5,9 @@ info:
   contact:
     name: eformsign Service Team
     email: eformsign@forcs.com
+    url: www.eformsign.com
   description: ''
+  termsOfService: 'https://www.eformsign.com/eform/account/terms.html?tab=0'
 servers:
   - url: 'https://api.eformsign.com/v2.0'
 paths:
