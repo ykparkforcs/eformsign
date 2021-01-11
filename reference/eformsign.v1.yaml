@@ -69,8 +69,77 @@ paths:
               schema:
                 type: object
                 properties:
-                  '':
+                  api_key:
+                    type: object
+                    description: 'API Key 정보로, name, alias, company등의 객체를 포함한다.'
+                    properties:
+                      name:
+                        type: string
+                        description: API Key 이름
+                      alias:
+                        type: string
+                        description: API Key 별칭
+                      company:
+                        type: object
+                        description: 'API Key의 회사 정보로, id, name, api_url 객체를 포함한다.'
+                        properties:
+                          id:
+                            type: string
+                            description: 회사 ID
+                          name:
+                            type: string
+                            description: 회사명
+                          api_url:
+                            type: string
+                            description: 회사의 서비스 API URL
+                  oauth_token:
+                    type: object
+                    description: '토큰 정보로, token_type, access_token, refresh_token, expires_in 객체를 포함한다.'
+                    properties:
+                      token_type:
+                        type: string
+                        description: 토큰 타입(JWT 고정)
+                      access_token:
+                        type: string
+                        description: access token
+                      refresh_token:
+                        type: string
+                        description: refresh token
+                      expires_in:
+                        type: integer
+                        description: 'Access token 유효시간(초)으로, Access token 발급 시점부터 expires_in 시간까지만 유효하다.'
+              examples:
+                Request:
+                  value:
+                    api_key:
+                      name: string
+                      alias: string
+                      company:
+                        id: string
+                        name: string
+                        api_url: string
+                    oauth_token:
+                      token_type: string
+                      access_token: string
+                      refresh_token: string
+                      expires_in: 0
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
                     type: string
+                    description: 에러 코드
+                  ErrorMessage:
+                    type: string
+                    description: 에러 메시지
+                  execution_time:
+                    type: integer
+                    format: int64
+                    description: 수행 시간
     parameters: []
 components:
   schemas:
