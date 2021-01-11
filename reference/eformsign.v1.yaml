@@ -33,6 +33,7 @@ paths:
           in: header
           name: Authorization
           description: api_key
+      summary: Access Token 발급
 components:
   schemas:
     User:
