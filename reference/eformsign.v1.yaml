@@ -50,7 +50,10 @@ paths:
                   description: '회사 멤버의 ID로, 회사 멤버의 Access token을 발급받을 때 추가로 입력한다.'
               required:
                 - execution_time
-            examples: {}
+            examples:
+              Request:
+                value:
+                  execution_time: 1533011071001
           application/xml:
             schema:
               type: object
@@ -109,20 +112,20 @@ paths:
                         type: integer
                         description: 'Access token 유효시간(초)으로, Access token 발급 시점부터 expires_in 시간까지만 유효하다.'
               examples:
-                Request:
+                Response Success:
                   value:
                     api_key:
-                      name: string
-                      alias: string
+                      name: access key
+                      alias: access Key alias
                       company:
-                        id: string
-                        name: string
-                        api_url: string
+                        company_id: 129jd93j29jd9j29jd
+                        name: Forcs
+                        api_url: 'https://kr-api.eformsign.com'
                     oauth_token:
-                      token_type: string
-                      access_token: string
-                      refresh_token: string
-                      expires_in: 0
+                      token_type: JWT
+                      access_token: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJvY2UuaWFtIiwiY29udGV4dCI6eyJjbGllbnRJZCI6IjE5MzEyYWI2NWQxMT...
+                      refresh_token: dcaf137b-e93e-4207-ba8a-2dd5a1250c45
+                      expires_in: 3600
         '403':
           description: Forbidden
           content:
@@ -140,6 +143,16 @@ paths:
                     type: integer
                     format: int64
                     description: 수행 시간
+              examples:
+                Response Failed 1:
+                  value:
+                    code: '4000002'
+                    ErrorMessage: The validation time has expired.
+                    execution_time: 1600247345051
+                Response Failed 2:
+                  value:
+                    code: '4030001'
+                    ErrorMessage: invalid api key
     parameters: []
 components:
   schemas:
