@@ -7,7 +7,7 @@ info:
     email: eformsign@forcs.com
   description: ''
 servers:
-  - url: 'https://api.eformsign.com/v2.0/'
+  - url: 'https://api.eformsign.com/v2.0'
 paths:
   '/users/{userId}':
     parameters:
