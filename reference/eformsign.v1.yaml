@@ -156,5 +156,13 @@ paths:
       tags:
         - eformsign
     parameters: []
+  /api_auth/refresh_token:
+    post:
+      summary: ''
+      operationId: post-api_auth-refresh_token
+      responses:
+        '200':
+          description: OK
+      description: ''
 tags:
   - name: eformsign
