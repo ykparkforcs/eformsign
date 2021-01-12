@@ -254,6 +254,24 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: "\tapplication/json"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: 에러 코드
+                  ErrorMessage:
+                    type: string
+                    description: 에러 메시지
       description: |-
         내부 수신자가 Access Token을 이용하여 자동으로 문서를 작성할 수 있습니다.
 
@@ -387,51 +405,162 @@ paths:
                       properties:
                         email:
                           type: string
+                          description: 외부 작성자가 작성한 문서가 최종 완료 되었을 때 알림을 받을 이메일
                         sms:
                           type: object
+                          description: 외부 작성자가 작성한 문서가 최종 완료 되었을 때 알림을 받을 휴대폰 정보
                           properties:
                             country_code:
                               type: string
+                              description: 외부 작성자가 작성한 문서가 최종 완료 되었을 때 알림을 받을 휴대폰 국가 코드
                             phone_number:
                               type: string
+                              description: 외부 작성자가 작성한 문서가 최종 완료 되었을 때 알림을 받을 휴대폰 번호
                             auth:
                               type: object
+                              description: 외부 작성자가 작성한 문서가 최종 완료 되었을 때 알림 인증 정보
                               properties:
+                                password:
+                                  type: string
+                                  description: 외부 작성자가 작성한 문서가 최종 완료 되었을 때 알림 인증 비밀번호
                                 password_hint:
                                   type: string
+                                  description: 외부 작성자가 작성한 문서가 최종 완료 되었을 때 알림 인증 비밀번호 힌트
                     notification:
                       type: array
+                      description: 완료 문서 전송 정보
                       items:
                         type: object
                         properties:
                           name:
                             type: string
+                            description: 완료 문서 전송을 보낼 사람의 이름
                           email:
                             type: string
+                            description: 완료 문서 전송을 보낼 사람의 이메일
                           sms:
                             type: object
+                            description: 완료 문서 전송을 보낼 사람의 휴대폰 정보
                             properties:
                               country_code:
                                 type: string
+                                description: 완료 문서 전송을 보낼 사람의 휴대폰 국가 코드
                               phone_number:
                                 type: string
+                                description: 완료 문서 전송을 보낼 사람의 휴대폰 번호
                           auth:
                             type: object
+                            description: 완료 문서의 인증 정보
                             properties:
                               password:
                                 type: string
+                                description: 완료 문서의 인증 비밀번호
                               password_hint:
                                 type: string
+                                description: 완료 문서의 인증 비밀번호 힌트
                               mobile_varification:
                                 type: boolean
+                                description: 완료 문서의 휴대폰 본인확인 여부
                               valid:
                                 type: object
+                                description: 완료 문서의 전송 기한
                                 properties:
                                   day:
                                     type: integer
+                                    description: 완료 문서의 전송 날짜
                                   hour:
                                     type: integer
+                                    description: 완료 문서의 전송 시간
               required:
                 - document
+            examples:
+              'Sample 1: 시작 - 완료':
+                value:
+                  document:
+                    document_name: 개인정보제공동의서
+                    comment: string
+                    receipients:
+                      - step_type: string
+                        id: string
+                        name: string
+                        email: string
+                        sms:
+                          country_code: string
+                          phone_number: string
+                        auth:
+                          password: string
+                          password_hint: string
+                          valid:
+                            day: 0
+                            hour: 0
+                    fields:
+                      - id: 고객명
+                        value: 홍길동
+                    select_group_name: string
+                    send_external_pdf:
+                      email: string
+                      sms:
+                        country_code: string
+                        phone_number: string
+                        auth:
+                          password: string
+                          password_hint: string
+                    notification:
+                      - name: string
+                        email: string
+                        sms:
+                          country_code: string
+                          phone_number: string
+                        auth:
+                          password: string
+                          password_hint: string
+                          mobile_varification: true
+                          valid:
+                            day: 0
+                            hour: 0
+              'example 2: 시작 - 외부자 - 완료':
+                value:
+                  document:
+                    document_name: string
+                    comment: string
+                    receipients:
+                      - step_type: string
+                        id: string
+                        name: string
+                        email: string
+                        sms:
+                          country_code: string
+                          phone_number: string
+                        auth:
+                          password: string
+                          password_hint: string
+                          valid:
+                            day: 0
+                            hour: 0
+                    fields:
+                      - id: string
+                        value: string
+                    select_group_name: string
+                    send_external_pdf:
+                      email: string
+                      sms:
+                        country_code: string
+                        phone_number: string
+                        auth:
+                          password: string
+                          password_hint: string
+                    notification:
+                      - name: string
+                        email: string
+                        sms:
+                          country_code: string
+                          phone_number: string
+                        auth:
+                          password: string
+                          password_hint: string
+                          mobile_varification: true
+                          valid:
+                            day: 0
+                            hour: 0
 tags:
   - name: eformsign
