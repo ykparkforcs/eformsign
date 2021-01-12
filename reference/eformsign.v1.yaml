@@ -259,6 +259,18 @@ paths:
               schema:
                 type: string
               description: "\tapplication/json"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                성공 시:
+                  value:
+                    template_id: 61b05d369b2a4a10b5c4c8a1373abc0d
+                    document:
+                      id: 61b05d369b2a4a10b5c4c8a1373abc03
+                      document_name: 개인정보제공동의서
         '403':
           description: Forbidden
           content:
@@ -272,6 +284,11 @@ paths:
                   ErrorMessage:
                     type: string
                     description: 에러 메시지
+              examples:
+                example-1:
+                  value:
+                    code: '4030001'
+                    ErrorMessage: invalid api key
       description: |-
         내부 수신자가 Access Token을 이용하여 자동으로 문서를 작성할 수 있습니다.
 
