@@ -937,5 +937,244 @@ paths:
                             hour: 0
       tags:
         - eformsign
+  '/api/documents/{DOCUMENT_ID}':
+    parameters:
+      - schema:
+          type: string
+        name: DOCUMENT_ID
+        in: path
+        required: true
+    get:
+      summary: 문서정보 조회
+      tags: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+              description: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: 문서 id
+                  template:
+                    type: object
+                    description: 템플릿 정보
+                    properties:
+                      id:
+                        type: string
+                        description: 템플릿 id
+                      name:
+                        type: string
+                        description: 템플릿 명
+                      document_name:
+                        type: string
+                        description: 문서 제목
+                      document_number:
+                        type: string
+                        description: 문서 번호
+                  creator:
+                    type: object
+                    description: '문서 생성자 정보(id, name 포함)'
+                    properties:
+                      id:
+                        type: string
+                        description: 문서 생성자 id
+                      name:
+                        type: string
+                        description: 생성자 명
+                      recipient_type:
+                        type: string
+                        description: 수신자 타입
+                      created_date:
+                        type: integer
+                        format: int64
+                        description: 생성일
+                  last_editor:
+                    type: object
+                    description: '문서 수정자 정보(id, name 포함)'
+                    properties:
+                      id:
+                        type: string
+                        description: 수정자 id
+                      name:
+                        type: string
+                        description: 수정자 명
+                      recipient_type:
+                        type: string
+                        description: 수신자 타입
+                      updated_date:
+                        type: integer
+                        format: int64
+                        description: 문서 수정일
+                  current_status:
+                    type: object
+                    description: 현재 상태 정보
+                    properties:
+                      status_type:
+                        type: string
+                        description: 상태 타입
+                      step_type:
+                        type: string
+                        description: 스탭 타입
+                      step_index:
+                        type: number
+                        description: 스탭 index
+                      step_name:
+                        type: string
+                        description: 스탭 명
+                  step_recipients:
+                    description: 수신자들 정보
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        recipient_type:
+                          type: string
+                          description: 수신자 타입
+                        id:
+                          type: string
+                          description: 수신자 id
+                        name:
+                          type: string
+                          description: 수신자 명
+                  fields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: 필드 id
+                        value:
+                          type: string
+                          description: 필드 값
+                        type:
+                          type: string
+                          description: 필드의 데이터 타입
+                  previous_status:
+                    type: array
+                    description: 이전 상태 정보
+                    items:
+                      type: object
+                      properties:
+                        step_type:
+                          type: string
+                          description: 스탭 ㅌ
+                        step_name:
+                          type: string
+                          description: 스탭 명
+                        action_type:
+                          type: string
+                          description: 액션 타입
+                        executor:
+                          type: object
+                          description: 수행자 정보
+                          properties:
+                            recipient_type:
+                              type: string
+                              description: 수행자 타입
+                            id:
+                              type: string
+                              description: 수행자 id
+                            name:
+                              type: string
+                              description: 수행자 이름
+                            executed_date:
+                              type: integer
+                              format: int64
+                              description: 수행 날짜
+                  next_status:
+                    type: array
+                    description: 다음 상태 정보
+                    items:
+                      type: object
+                      properties:
+                        step_type:
+                          type: string
+                          description: 스탭 타입
+                        step_name:
+                          type: string
+                          description: 스탭 명
+                        step_recipients:
+                          type: object
+                          description: 수신자들 정보
+                          properties:
+                            recipient_type:
+                              type: string
+                              description: 수신자 타입
+                            id:
+                              type: string
+                              description: 수신자 id
+                            name:
+                              type: string
+                              description: 수신자 이름
+                  histories:
+                    type: array
+                    description: 히스토리 정보
+                    items:
+                      type: object
+                      properties:
+                        step_type:
+                          type: string
+                          description: 스탭 타입
+                        action_type:
+                          type: string
+                          description: 액션 타입
+                        executor:
+                          type: object
+                          description: 수행자 정보
+                          properties:
+                            recipient_type:
+                              type: string
+                              description: 수행자 타입
+                            id:
+                              type: string
+                              description: ''
+                            name:
+                              type: string
+                              format: int64
+                              description: 수행자 이름
+                            executor_date:
+                              type: integer
+                              format: int64
+                              description: 수행 날짜
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: 에러 코드
+                  ErrorMessage:
+                    type: string
+                    description: 에러 메시지
+              examples:
+                실패 시:
+                  value:
+                    code: '4030001'
+                    ErrorMessage: invalid api key
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+      operationId: get-api-documents-DOCUMENT_ID
+      description: |-
+        문서의 일반정보, 상세정보, 이력, 진행상황 등을 조회합니다.
+
+        *참고: http://wiki.oz4cs.com/display/eformsignapi/2.2.3+Open+API
 tags:
   - name: eformsign
