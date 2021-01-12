@@ -249,7 +249,7 @@ paths:
     parameters: []
   /api/documents:
     post:
-      summary: ''
+      summary: 새 문서 작성(내부 수신자)
       operationId: post-api-documents
       responses:
         '200':
@@ -263,7 +263,16 @@ paths:
             application/json:
               schema:
                 type: object
-                properties: {}
+                properties:
+                  template_id:
+                    type: string
+                  document:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      document_name:
+                        type: string
               examples:
                 성공 시:
                   value:
@@ -285,7 +294,7 @@ paths:
                     type: string
                     description: 에러 메시지
               examples:
-                example-1:
+                실패 시:
                   value:
                     code: '4030001'
                     ErrorMessage: invalid api key
@@ -579,5 +588,7 @@ paths:
                           valid:
                             day: 0
                             hour: 0
+      tags:
+        - eformsign
 tags:
   - name: eformsign
