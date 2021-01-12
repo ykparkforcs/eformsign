@@ -1175,6 +1175,19 @@ paths:
       description: |-
         문서의 일반정보, 상세정보, 이력, 진행상황 등을 조회합니다.
 
+        도메인에는 Access Token을 발급 받은 company.api_url 값을 사용합니다.
+
         *참고: http://wiki.oz4cs.com/display/eformsignapi/2.2.3+Open+API
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer <access_token>
 tags:
   - name: eformsign
