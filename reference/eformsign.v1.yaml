@@ -189,6 +189,27 @@ paths:
                       oauth_token.expires_in:
                         type: integer
                         description: 'Access token의 유효시간(초)으로, Access token 발급 시점부터 expires_in 시간 까지만 유효하다.'
+              examples:
+                example-1:
+                  value:
+                    oauth_token:
+                      oauth_token.token_type: string
+                      oauth_token.access_token: string
+                      oauth_token.refresh_token: string
+                      oauth_token.expires_in: 0
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: 에러 코드
+                  ErrorMessage:
+                    type: string
+                    description: 에러 메시지
       description: Access Token을 갱신합니다.
       parameters:
         - schema:
@@ -203,11 +224,19 @@ paths:
           name: Authorization
           description: Bearer <access_token>
           required: true
-        - schema:
-            type: string
-          in: query
-          name: refresh_token
-          description: Access Token 갱신을 위한 Refresh Token
-          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+                  description: Access Token 갱신을 위한 Refresh Token
+              required:
+                - refresh_token
+            examples:
+              Request:
+                value: {}
 tags:
   - name: eformsign
