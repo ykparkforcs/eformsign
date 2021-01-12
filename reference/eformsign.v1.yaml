@@ -177,26 +177,26 @@ paths:
                     type: object
                     description: '토큰 정보로 토큰 객체(token_type, access_token, refresh_token, expires_in)를 포함한다.'
                     properties:
-                      oauth_token.token_type:
+                      token_type:
                         type: string
                         description: 토큰 타입(JWT 고정)
-                      oauth_token.access_token:
+                      access_token:
                         type: string
                         description: Access Token
-                      oauth_token.refresh_token:
+                      refresh_token:
                         type: string
                         description: Refresh Token
-                      oauth_token.expires_in:
+                      expires_in:
                         type: integer
                         description: 'Access token의 유효시간(초)으로, Access token 발급 시점부터 expires_in 시간 까지만 유효하다.'
               examples:
                 example-1:
                   value:
                     oauth_token:
-                      oauth_token.token_type: string
-                      oauth_token.access_token: string
-                      oauth_token.refresh_token: string
-                      oauth_token.expires_in: 0
+                      token_type: JWT
+                      access_token: eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJvY2UuaWFtIiwiY29udGV4dCI6eyJjbGllbnRJZCI6IjE5MzEyYWI2NWQxMTQ4NjY4ZDJiNjFjYjZjYzUwNTBmIiwiY2x-PtUZnqHGtUHKCkKelu5JN2PSSv6ZI8 ... UxeMTmjx_97ip2bragIfPaOd70V1qHY1SP_IFTLLlnzd_PUIwiPS0
+                      refresh_token: 03a54d50-f0a2-4db6-9f1a-02b3e6d9a68f
+                      expires_in: 3600
         '403':
           description: Forbidden
           content:
@@ -210,6 +210,11 @@ paths:
                   ErrorMessage:
                     type: string
                     description: 에러 메시지
+              examples:
+                example-1:
+                  value:
+                    code: '4030001'
+                    ErrorMessage: invalid api key
       description: Access Token을 갱신합니다.
       parameters:
         - schema:
@@ -237,6 +242,7 @@ paths:
                 - refresh_token
             examples:
               Request:
-                value: {}
+                value:
+                  refresh_token: dcaf137b-e93e-4207-ba8a-2dd5a1250c45
 tags:
   - name: eformsign
