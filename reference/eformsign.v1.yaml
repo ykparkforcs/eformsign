@@ -1175,7 +1175,7 @@ paths:
                 properties: {}
       operationId: get-api-documents-DOCUMENT_ID
       description: |-
-        # 성공시 Response 예제 추가 못함. step_recipients 프로퍼티 타입이  Ojbect여야 한다는 에러 발생
+        (이슈: 성공시 Response 예제 추가 못함. step_recipients 프로퍼티 타입이  Ojbect여야 한다는 에러 발생)
 
         문서의 일반정보, 상세정보, 이력, 진행상황 등을 조회합니다.
 
@@ -1325,5 +1325,12 @@ paths:
           name: Authorization
           description: Bearer <access_token>
           required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+            examples: {}
 tags:
   - name: eformsign
